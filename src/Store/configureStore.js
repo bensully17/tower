@@ -2,9 +2,11 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux"
 import thunk from "redux-thunk"
 
 import calReducer from './reducers/cal'
+import authReducer from './reducers/auth'
 
 const rootReducer = combineReducers({
-    cal: calReducer
+    cal: calReducer,
+    auth: authReducer
 })
 
 let composeEnhancers = compose;

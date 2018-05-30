@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import '../../App.css'
 import Nav from '../../Containers/Nav/Nav'
 import { connect } from 'react-redux'
+import API_KEY from './api'
+import { updateUID } from '../../Store/actions/index'
 require('dotenv').load()
-const API_KEY = process.env.AUTH_API
+
 
 
 
@@ -29,13 +31,22 @@ class Login extends Component {
             })
         })
         .then(res => res.json())
-        .then(res => console.log(res.error))
-        .then(res => this.props.history.push({pathname: "/" + 'calendar'}))
+        .then(res => {
+            if (res.error) {
+                console.log(res.error)
+                alert(res.error.message)
+            }
+            else {
+                let uid = res.localId
+                this.props.changeUID(uid)
+                this.props.history.push({pathname: "/calendar"})
+            }
+        })
     }
 
     createAccountHandler = (event) => {
         event.preventDefault()
-        this.props.history.push({pathname: "/" + "createaccount"})
+        this.props.history.push({pathname: "/createaccount"})
 
     }
 
@@ -48,7 +59,7 @@ class Login extends Component {
                     <input name='email' type='text' onChange={event => this.setState({email: event.target.value})} value={this.state.email}/>
                     <label htmlFor='pass'>Password:</label>
                     <input name='pass' type='password' onChange={event => this.setState({pass: event.target.value})} value={this.state.pass}/>
-                    <button onClick={event => this.loginHandler(event)}>Submit</button>
+                    <button onClick={event => this.loginHandler(event)}>Login</button>
                     <button onClick={event => this.createAccountHandler(event)}>Create New Account</button>
                 </form>
             </div>
@@ -56,5 +67,19 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        uid: state.uid
+    }
+}
 
-export default connect(null, null)(Login)
+const mapDispatchToProps = dispatch => {
+    return {
+        changeUID: uid => {
+            return dispatch(updateUID(uid))
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

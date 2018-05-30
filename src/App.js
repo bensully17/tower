@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import Login from './Containers/Login/Login'
 import Calendar from './Containers/Calendar/Calendar'
 import CreateAccount from './Containers/Login/createAccount'
+import AddAppt from './Containers/AddAppt/AddAppt'
 
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
             <Route path="/" exact component={Login}/>
             <Route path="/calendar" component={Calendar}/>
             <Route path="/createaccount" component={CreateAccount}/>
+            <Route path="/newappointment" component={AddAppt}/>
         </div>
     );
   }
