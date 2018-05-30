@@ -8,11 +8,11 @@ class CalendarView extends Component {
         console.log('working', date)
         this.props.updateDate(date)
     }
-  render() {
-    return (
-        <Calendar id='cal' onChange={event => this.updateDateHandler(event)}/>
-    )
-  }
+    render() {
+        return (
+            <Calendar id='cal' onChange={event => this.updateDateHandler(event)}/>
+        )
+    }
 }
 
 const mapStateToProps = state => {

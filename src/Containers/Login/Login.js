@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import '../../App.css'
 import Nav from '../../Containers/Nav/Nav'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 require('dotenv').load()
 const API_KEY = process.env.AUTH_API
 
@@ -30,9 +30,12 @@ class Login extends Component {
         })
         .then(res => res.json())
         .then(res => console.log(res.error))
+        .then(res => this.props.history.push({pathname: "/" + 'calendar'}))
     }
 
-    createAccountHandler = () => {
+    createAccountHandler = (event) => {
+        event.preventDefault()
+        this.props.history.push({pathname: "/" + "createaccount"})
 
     }
 
@@ -46,7 +49,7 @@ class Login extends Component {
                     <label htmlFor='pass'>Password:</label>
                     <input name='pass' type='password' onChange={event => this.setState({pass: event.target.value})} value={this.state.pass}/>
                     <button onClick={event => this.loginHandler(event)}>Submit</button>
-                    <button onClick={this.createAccountHandler}>Create New Account</button>
+                    <button onClick={event => this.createAccountHandler(event)}>Create New Account</button>
                 </form>
             </div>
         );
@@ -54,4 +57,4 @@ class Login extends Component {
 }
 
 
-export default Login
+export default connect(null, null)(Login)
