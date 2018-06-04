@@ -6,9 +6,6 @@ import API_KEY from './api'
 import { updateUID } from '../../Store/actions/index'
 require('dotenv').load()
 
-
-
-
 class Login extends Component {
     state = {
         email: '',

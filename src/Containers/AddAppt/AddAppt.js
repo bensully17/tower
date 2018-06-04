@@ -13,9 +13,31 @@ class AddAppt extends Component {
     }
 
     addApptHandler = (event) => {
-        event.preventDefault()
-        console.log(this.state)
-        // this.props.history.push({pathname: '/calendar'})
+        event.preventDefault()        
+        if (this.state.appt == null || this.state.date == null) {
+            alert('You must insert a name and date for the appointment.')
+        }
+        else {
+            let data = {
+                "uid": this.props.userId,
+                "name": this.state.appt,
+                "date": this.state.date,
+                "time": this.state.time,
+                "description": this.state.desc
+            }
+            fetch('https://pregnancy-tracker-app.herokuapp.com/userAppts', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
+        }
+
     }
 
     render() {
@@ -41,7 +63,7 @@ class AddAppt extends Component {
 
 const mapStateToProps = state => {
     return {
-        date: state.date
+        userId: state.auth.uid
     }
 }
 
