@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import '../../App.css'
 import Nav from '../../Containers/Nav/Nav'
 import API_KEY from './api'
-require('dotenv').load()
-
-
-
 
 class Login extends Component {
     state = {

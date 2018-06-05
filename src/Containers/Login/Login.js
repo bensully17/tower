@@ -4,7 +4,6 @@ import Nav from '../../Containers/Nav/Nav'
 import { connect } from 'react-redux'
 import API_KEY from './api'
 import { updateUID } from '../../Store/actions/index'
-require('dotenv').load()
 
 class Login extends Component {
     state = {
