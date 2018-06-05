@@ -70,6 +70,14 @@ form > button {
   display: flex;
   justify-content: center;
 }
+.apptContainer {
+  margin-top: 2%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
 
 .apptButtonContainer {
   width: 100%;
@@ -97,4 +105,13 @@ form > button {
 #apptdesc {
   margin-top: 1%;
   width: 40%
+}
+
+.apptCard {
+  /* border: 1px solid #333; */
+  box-shadow: 2px 2px 2px #aaa;
+  border-radius: 5px;
+  background-color: lightblue;
+  width: 40%;
+  margin-top: 1%;
 }

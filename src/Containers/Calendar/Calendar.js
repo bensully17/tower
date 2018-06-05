@@ -26,23 +26,13 @@ class CalendarView extends Component {
         this.setState({matchingAppts: matchingAppointments})
     }
 
-    renderAppointments = () => {
-        this.state.matchingAppts.forEach((appt) => {
-            return(
-                <div>
-                    <h2>
-                        {appt.name}
-                    </h2>
-                    <h3>
-                        {appt.time}
-                    </h3>
-                    <p>
-                        {appt.description}
-                    </p>
-                </div>
-            )
-        })
-    }
+    // renderAppointments = () => {
+    //     this.state.matchingAppts.forEach((appt) => {
+    //         return(
+               
+    //         )
+    //     })
+    // }
     updateDateHandler = (date) => {
         return new Promise ((resolve, reject) => resolve(this.props.updateDate(date)))
         .then(() => {
@@ -62,8 +52,23 @@ class CalendarView extends Component {
                 <div className='calContainer'>
                     <Calendar id='cal' onChange={event => this.updateDateHandler(event)} value={this.props.date}/>
                 </div>
-                <div>
-                    {renderAppointments}
+                <div className='apptContainer'>
+                    {this.state.matchingAppts.map((appt) => {
+                        return (
+                            <div className='apptCard'>
+                                <h3>
+                                    {appt.name}
+                                </h3>
+                                <h4>
+                                    {appt.time}
+                                </h4>
+                                <p>
+                                    {appt.description}
+                                </p>
+                                <button onClick={() => this.props.history.push({pathname: '/map'})}>Show Map</button>
+                            </div>
+                        )
+                    })}
                 </div>
                 <div className='apptButtonContainer'>
                     <button id='apptButton' onClick={event => this.addApptHandler(event)}>Add Appointment</button>

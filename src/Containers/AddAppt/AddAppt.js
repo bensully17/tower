@@ -7,7 +7,7 @@ import Nav from '../Nav/Nav'
 class AddAppt extends Component {
     state = {
         appt: null,
-        date: null,
+        date: `${this.props.date.getFullYear()}-${this.props.date.getMonth()}-${this.props.date.getDate()}`,
         time: null,
         desc: null
     }
@@ -34,13 +34,14 @@ class AddAppt extends Component {
                 body: JSON.stringify(data)
             })
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => this.props.history.push({pathname: '/calendar'}))
             .catch(err => console.error(err))
         }
 
     }
 
     render() {
+        console.log(this.state)
         return (
             <div id='App' className='App'>
                 <Nav/>
@@ -48,7 +49,7 @@ class AddAppt extends Component {
                     <label for='appt'>Appointment:</label>
                     <input name='appt' type='text' onChange={event => this.setState({appt: event.target.value})}/>
                     <label for='date'>Date:</label>
-                    <input name='date' type='date' onChange={event => this.setState({date: event.target.value})}/>
+                    <input name='date' type='date' onChange={event => this.setState({date: event.target.value})} value={this.state.date}/>
                     <label for='time'>Time:</label>
                     <input name='time' type='time' onChange={event => this.setState({time: event.target.value})}/>
                     <label for='description'>Description:</label>
@@ -63,7 +64,8 @@ class AddAppt extends Component {
 
 const mapStateToProps = state => {
     return {
-        userId: state.auth.uid
+        userId: state.auth.uid,
+        date: state.cal.date
     }
 }
 
